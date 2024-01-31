@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { findTrainers, upsertTrainer } from "~/server/utils/trainer";
+import { findTrainers, upsertTrainer, getTrainer } from "~/server/utils/trainer";
 import { findPokemon } from "~/server/utils/pokemon";
 
 const router = Router();
@@ -13,7 +13,11 @@ router.get("/trainers", async (_req, res, next) => {
   try {
     const trainers = await findTrainers();
     // TODO: 期待するレスポンスボディに変更する
-    res.send(trainers);
+    const trainerNames = trainers.map((item) => {
+      return item.Key
+    });
+    // TODO END
+    res.send(trainerNames);
   } catch (err) {
     next(err);
   }
@@ -33,7 +37,17 @@ router.post("/trainer", async (req, res, next) => {
 
 /** トレーナーの取得 */
 // TODO: トレーナーを取得する API エンドポイントの実装
+router.get("/trainer/:trainerName", async (req, res, next)=>{
+  try {
+    const result = await getTrainer(req.params.trainerName);
+    res.send(result);
+  } catch(err){
+    next(err);
+  }
 
+});
+
+// TODO: END
 /** トレーナーの更新 */
 router.post("/trainer/:trainerName", async (req, res, next) => {
   try {

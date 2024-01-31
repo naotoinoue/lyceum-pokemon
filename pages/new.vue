@@ -1,9 +1,31 @@
-<script setup></script>
+<script setup>
+const onClick = async ()=>{
+  const respones = await fetch("/api/trainer",{
+    method:'POST',
+    headers:{
+      "Content-Type":"application/json"
+    },
+    body:JSON.stringify({
+      "name":"noato"
+    })
+    
+  })
 
+  
+}
+
+
+</script>
 <template>
   <div>
     <h1>あたらしくはじめる</h1>
-    <form @submit.prevent></form>
+    では　はじめに　きみの　なまえを　おしえて　もらおう！
+    <form @submit.prevent="onClick">
+      なまえ
+      とくていの　もじは　とりのぞかれるぞ！
+      <input>
+      <button type="submit">けってい</button>
+    </form>
   </div>
 </template>
 
