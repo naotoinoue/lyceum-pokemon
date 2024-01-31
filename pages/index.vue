@@ -2,7 +2,7 @@
 
 <template>
   <div>
-    <h1>ポケットモンスター</h1>
+    <h1>myポケットモンスター</h1>
     <GamifyList>
       <GamifyItem>
         <NuxtLink to="/trainer">つづきからはじめる</NuxtLink>
