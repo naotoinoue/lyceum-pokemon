@@ -1,19 +1,18 @@
 <script setup>
+
+const trainerName = ref("");
 const onClick = async ()=>{
-  const respones = await fetch("/api/trainer",{
+  const response = await fetch("/api/trainer",{
     method:'POST',
     headers:{
       "Content-Type":"application/json"
     },
     body:JSON.stringify({
-      "name":"noato"
+      "name":trainerName.value
     })
-    
   })
-
   
 }
-
 
 </script>
 <template>
@@ -23,8 +22,9 @@ const onClick = async ()=>{
     <form @submit.prevent="onClick">
       なまえ
       とくていの　もじは　とりのぞかれるぞ！
-      <input>
-      <button type="submit">けってい</button>
+      <input v-model = "trainerName">
+      <p>{{ trainerName }}</p>
+      <button type="submit" @click="onClick">けってい</button>
     </form>
   </div>
 </template>

@@ -28,7 +28,6 @@ export const getTrainer = async(trainer) => {
       Key:trainer+".json"
     })
   )
-
   return object.Body.transformToString();
 }
 
@@ -42,6 +41,7 @@ export const upsertTrainer = async (name, trainer) => {
       Body: JSON.stringify({ name: "", pokemons: [], ...trainer }),
     }),
   );
+  console.log("PubObjectCommand result: "+JSON.stringify(result));
   return result;
 };
 
