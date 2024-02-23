@@ -4,8 +4,8 @@ import { defineNuxtConfig } from "nuxt/config";
 export default defineNuxtConfig({
   css: ["animate.css"],
   runtimeConfig: {
-    region: "ap-northeast-1",
-    bucketName: "",
+    region: "eu-central-1",
+    bucketName: "km-sd11-pokemon",
     public: {
       backendOrigin: undefined,
     },

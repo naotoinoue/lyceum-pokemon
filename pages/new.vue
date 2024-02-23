@@ -10,8 +10,7 @@ const onClick = async ()=>{
     body:JSON.stringify({
       "name":trainerName.value
     })
-  })
-  
+  })  
 }
 
 </script>

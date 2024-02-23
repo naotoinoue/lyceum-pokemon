@@ -14,7 +14,8 @@ const { data:trainers } = await useTrainers();
     トレーナーの画面へのリンクを生成する -->
     <GamifyList>
       <GamifyItem v-for="trainer in trainers" :key="trainer">
-        <NuxtLink to="`/trainer/${trainer}`">{{ trainer }}</NuxtLink>
+        <!-- ★toの前に:が必要だったことが判明 ← わかるまで結構時間かかった -->
+        <NuxtLink :to="`/trainer/${trainer}`">{{ trainer }}</NuxtLink>
       </GamifyItem>
     </GamifyList>
 

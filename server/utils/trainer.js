@@ -13,6 +13,7 @@ const streamToString = (stream) =>
 
 /** トレーナーの一覧の取得 */
 export const findTrainers = async () => {
+  console.log("config.buketName : "+config.bucketName);
   const objects = await s3Client.send(
     new ListObjectsCommand({ Bucket: config.bucketName }),
   );
@@ -33,6 +34,10 @@ export const getTrainer = async(trainer) => {
 
 
 /** トレーナーの追加更新 */
+// trainerはnameとpokemonsを含むオブジェクト
+// name : jsonファイルのキーとして使われる
+// trainer : trainerオブジェクト(name, pokemons)の更新に使われる
+// 空の情報をtrainerで上書きしているため、trainerに全ての情報を含む必要あり
 export const upsertTrainer = async (name, trainer) => {
   const result = await s3Client.send(
     new PutObjectCommand({

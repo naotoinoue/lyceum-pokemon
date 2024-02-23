@@ -60,7 +60,6 @@ router.post("/trainer", async (req, res, next) => {
 router.get("/trainer/:trainerName", async (req, res, next)=>{
   try {
     const result = await getTrainer(req.params.trainerName);
-    console.log(JSON.stringify(result));
     res.send(result);
   } catch(err){
     next(err);
@@ -96,10 +95,21 @@ router.post("/trainer/:trainerName", async (req, res, next) => {
 // TODO: トレーナーを削除する API エンドポイントの実装
 
 /** ポケモンの追加 */
+// Body : {name : pikachu}
 router.post("/trainer/:trainerName/pokemon", async (req, res, next) => {
+  console.log("/trainer/"+req.params.traineName+"/pokemon");
   try {
+    // トレーナー情報取得
     const { trainerName } = req.params;
+    let trainer = await getTrainer(trainerName);
+    console.log("trainer : "+trainer);
+
+    // ポケモン情報取得
     // TODO: リクエストボディにポケモン名が含まれていなければ400を返す
+    if(!("name" in req.body)){
+      console.log("name is null ");
+      res.status(400).send("name property does NOT exist");
+    }
     const pokemonFromPokeAPI = await findPokemon(req.body.name);
     const pokemon = {
       "id":pokemonFromPokeAPI.id,
@@ -110,9 +120,13 @@ router.post("/trainer/:trainerName/pokemon", async (req, res, next) => {
         "front_default":pokemonFromPokeAPI.sprites.front_default
       }
     };
-    // console.log("pokemon : "+JSON.stringify(pokemon));
+    trainer = JSON.parse(trainer);
+
+    // トレーナーの手持ちポケモンにポケモンを追加
+    trainer.pokemons.push(pokemon);
+
     // TODO: 削除系 API エンドポイントを利用しないかぎりポケモンは保持する
-    const result = await upsertTrainer(trainerName, { name:trainerName, pokemons: [pokemon] });
+    const result = await upsertTrainer(trainerName, trainer);
     res.status(result["$metadata"].httpStatusCode).send(result);
   } catch (err) {
     next(err);

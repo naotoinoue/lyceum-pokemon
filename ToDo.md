@@ -11,12 +11,12 @@
         - メッセージを表示する？トレーナーの画面に移行する？
   - つづきからはじめる( /trainer)
     - トレーナーリストの表示
-      - [★]GET /trainersのコール ... pages/trainer/index.vue内で/api/trainersをコールした結果を扱うところに苦戦中。vueインスタンスのdataプロパティに値を入れることで.vueのtemplateから参照できそう。次回は取得したトレーナー一覧をv-forで表示して、トレーナー個別の画面へ遷移できるページを作る
-    - トレーナーを選んでトレーナー保有ポケモンリスト画面に遷移する
+      - [Done]GET /trainersのコール ... pages/trainer/index.vue内で/api/trainersをコールした結果を扱うところに苦戦中。vueインスタンスのdataプロパティに値を入れることで.vueのtemplateから参照できそう。次回は取得したトレーナー一覧をv-forで表示して、トレーナー個別の画面へ遷移できるページを作る
+    - [Done]トレーナーを選んでトレーナー保有ポケモンリスト画面に遷移する
   - トレーナーポケモンリスト画面( /trainer/{name}/)
-    - ポケモンリストを表示する
+    - [Done]ポケモンリストを表示する
       - GET /trainer/{name}/pokemons?
-    - ポケモンをつかまえる
+    - [★]ポケモンをつかまえる ... ポケモンをつかまえるためのボタンは表示した。ボタンをクリックした後のページ遷移とポケモン一覧取得をやる。
       - ポケモンリストを表示
         - GET /pokemon ?
       - 各ポケモンに「つかまえる」ボタンを配置
@@ -31,7 +31,7 @@
     - トレーナー情報を取得する
   - [Done]POST /trainer/:trainerName
     - トレーナー情報を更新する
-  - [Done]PUT /trainer/{name}/pokemon/{pokemon}
+  - [Done]PUT /trainer/{name}/pokemon/{pokemon} ... 足すのではなく、上書きしていたことが判明したため要修正。
     - トレーナーにポケモンを足す
   - GET /pokemon
     - ポケモンAPIでポケモン一覧を返す
